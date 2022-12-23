@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigate"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment4">
+    <fragment
+        android:id="@+id/homeFragment4"
+        android:name="com.example.orion.doctorgo.fregments.homeFragment"
+        android:label="homeFragment"
+        tools:layout="@layout/registration">
+
+        <action
+            android:id="@+id/action_homeFragment4_to_homeFregment"
+            app:destination="@id/homeFregment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFregment"
+        android:name="com.example.orion.doctorgo.fregments.homeFregment"
+        android:label="homeFregment"
+        tools:layout="@layout/fragment_home_fregment"/>
+
+</navigation>
