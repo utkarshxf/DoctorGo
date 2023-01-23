@@ -32,17 +32,18 @@ fun PostRequest(context:Context,name:String,gender:String,email:String,practiceM
         .build()
 
 
-    var userpostnn=userpost(email,gender,name,practiceMonth,practiceYear)
-    var dummy = userpost("abcd@gmail.com","m","abcd","23","2002")
+    var userpostnn = userpost(email,gender,name,practiceMonth,practiceYear)
+    Toast.makeText(context, email, Toast.LENGTH_SHORT).show()
+//    var dummy = userpost("aqweerretfrd@gmail.com","m","abrtrcd","23","2002")
     var jsonPlaceholderApi = retrofitBuilder.create(apiInterface::class.java)
     val call = jsonPlaceholderApi.sendUserData(userpostnn)
-    var success:Int
+
 
 
     call.enqueue(object : Callback<userpost> {
         override fun onResponse(call: Call<userpost>, response: Response<userpost>) {
 
-            Toast.makeText(context, "succefully to make a request", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "succefull to make a request", Toast.LENGTH_LONG).show()
 
         }
 

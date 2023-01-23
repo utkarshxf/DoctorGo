@@ -14,11 +14,13 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.example.orion.doctorgo.GETcall.getCall
+import com.example.orion.doctorgo.GETcall.get
+//import com.example.orion.doctorgo.GETcall.getCall
 import com.example.orion.doctorgo.MainActivity
 import com.example.orion.doctorgo.PostRequest.PostRequest
 import com.example.orion.doctorgo.R
 import com.example.orion.doctorgo.databinding.RegistrationBinding
+import kotlinx.android.synthetic.main.fragment_doctor_list.*
 import kotlinx.android.synthetic.main.registration.*
 import kotlinx.android.synthetic.main.registration.view.*
 import retrofit2.*
@@ -79,14 +81,15 @@ class homeFragment : Fragment() {
                  practiceYear=binding.textyear.toString()
             Toast.makeText(context, gender, Toast.LENGTH_SHORT).show()
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-           var name = PostRequest(requireContext(),name,gender,email,practiceMonth,practiceYear)
+//           var name = PostRequest(requireContext(),name,gender,email,practiceMonth,practiceYear)
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-//            getCall(requireContext())
-            if (name != null){
+
+
+
                 it.findNavController().navigate(R.id.action_homeFragment4_to_homeFregment)
 
 
-            }
+
         }
         return binding.root
 

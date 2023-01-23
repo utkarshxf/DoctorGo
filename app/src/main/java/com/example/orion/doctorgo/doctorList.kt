@@ -1,59 +1,82 @@
 package com.example.orion.doctorgo
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.orion.doctorgo.GETcall.get
+import com.example.orion.doctorgo.api.apiInterface
+import com.example.orion.doctorgo.databinding.FragmentDoctorListBinding
+import com.example.orion.doctorgo.model.D
+import com.example.orion.doctorgo.model.listview
+import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.fragment_doctor_list.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+ class doctorList() : Fragment() {
+     private  var responce = get()
+    lateinit var getview:listview
 
-/**
- * A simple [Fragment] subclass.
- * Use the [doctorList.newInstance] factory method to
- * create an instance of this fragment.
- */
-class doctorList : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor_list, container, false)
+    ): View {
+
+        val binding= DataBindingUtil.inflate<FragmentDoctorListBinding>(inflater,
+            R.layout.fragment_doctor_list, container,false)
+        val httpClient = OkHttpClient.Builder()
+        val recyclerView = binding.myrecyclerview
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+
+        httpClient.addInterceptor { chain ->
+            val request: Request = chain.request().newBuilder()
+                .addHeader("Accept", "application/json")
+                .addHeader("Content-Type", "application/json")
+                .addHeader("X-Requested-With", "X")
+                .build()
+            chain.proceed(request)
+        }
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("http://199.192.26.248:8000/")
+            .build()
+            .create(apiInterface::class.java)
+
+        GlobalScope.launch {
+            try {
+                recyclerView.adapter = baseAdapter(getview.d.results)
+
+
+            }
+            catch ( e : Exception )
+            {
+                Log.d( "qwerty", "Exception: " + e.message )
+            }
+        }
+
+        responce.responce.observe(viewLifecycleOwner){
+            var list =it
+            Log.d( "chutiya", list.toString() )
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment doctorList.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            doctorList().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

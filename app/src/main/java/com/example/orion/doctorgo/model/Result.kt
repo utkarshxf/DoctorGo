@@ -1,5 +1,7 @@
 package com.example.orion.doctorgo.model
 
+import java.lang.reflect.Constructor
+
 data class Result(
     val __metadata: Metadata,
     val doctors_id: String,
@@ -8,4 +10,5 @@ data class Result(
     val name: String,
     val practice_frm_month: String,
     val practice_frm_year: String
+
 )

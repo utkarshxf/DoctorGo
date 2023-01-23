@@ -1,5 +1,5 @@
 package com.example.orion.doctorgo.model
 
-data class responce(
+data class listview(
     val d: D
 )
