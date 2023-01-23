@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.tickets.view.*
 
 class baseAdapter( var mList: List<Result>): RecyclerView.Adapter<baseAdapter.MyViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): baseAdapter.MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.tickets, parent, false)
         return MyViewHolder(itemView)

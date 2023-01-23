@@ -1,9 +1,6 @@
 package com.example.orion.doctorgo.fregments
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,10 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.example.orion.doctorgo.GETcall.get
 //import com.example.orion.doctorgo.GETcall.getCall
-import com.example.orion.doctorgo.MainActivity
-import com.example.orion.doctorgo.PostRequest.PostRequest
 import com.example.orion.doctorgo.R
 import com.example.orion.doctorgo.databinding.RegistrationBinding
 import kotlinx.android.synthetic.main.fragment_doctor_list.*
