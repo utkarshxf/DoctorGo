@@ -26,5 +26,5 @@ interface apiInterface {
         "Content-Type:application/json",)
 
     @GET("sap/opu/odata/sap/ZCDS_TEST_REGISTER_CDS/ZCDS_TEST_REGISTER")
-   suspend  fun getUsers():listview
+   suspend  fun getUsers(): retrofit2.Response<listview>
 }
